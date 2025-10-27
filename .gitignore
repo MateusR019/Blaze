@@ -1,0 +1,15 @@
+# OS generated files
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Dependencies / build caches
+node_modules/
+dist/
+build/
+
+# Editor folders
+.vscode/
+.idea/
