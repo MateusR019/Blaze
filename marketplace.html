@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8">
@@ -20,8 +20,8 @@
                 <a href="index.html#topo">Inicio</a>
                 <a href="#colecao">Marketplace</a>
                 <a href="index.html#regras">Regras</a>
-                <a class="site-nav__cta" href="index.html#wallet">Conect Wallet</a>
             </nav>
+            <button class="site-nav__wallet" type="button" id="connect-wallet">Connect Wallet</button>
         </div>
     </header>
     <section class="hero market-hero">
@@ -84,6 +84,10 @@
                 <li><strong>Eventos IRL/online:</strong> meetups, campeonatos e sessoes fechadas com a staff.</li>
             </ul>
             <p>Sem pay-to-win: os itens sao cosmeticos, conveniencia e governanca. O meta survival continua igual para todos.</p>
+            <div class="wallet-check">
+                <button class="wallet-check__button" type="button" id="check-holder">Verificar holder</button>
+                <p class="wallet-check__result" id="holder-result">Conecte sua wallet Solana para checar se voce ja possui os NFTs principais.</p>
+            </div>
         </section>
         <section class="section">
             <h2>Perguntas frequentes</h2>
@@ -107,5 +111,7 @@
         <p>Marketplace BlazeCore 2025</p>
     </footer>
     <script src="wallet.js"></script>
+    <script src="holder.js"></script>
 </body>
 </html>
+

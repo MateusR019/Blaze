@@ -20,8 +20,8 @@
                 <a href="marketplace.html">Marketplace</a>
                 <a href="#loja">Loja</a>
                 <a href="#regras">Regras</a>
-                <a class="site-nav__cta" href="#wallet">Conect Wallet</a>
             </nav>
+            <button class="site-nav__wallet" type="button" id="connect-wallet">Connect Wallet</button>
         </div>
     </header>
     <section class="hero" id="topo">
@@ -91,22 +91,53 @@
             </ul>
         </section>
         <section class="section section--donate" id="wallet">
-            <h2>Conecte sua wallet</h2>
-            <p>O foco e Solana. Estamos preparando integracao nativa com Phantom e Backpack para marcar presenca on-chain, liberar eventos e recompensas especiais.</p>
-            <div class="wallet-connect">
-                <button class="wallet-connect__button" type="button" id="connect-wallet">Conectar wallet Solana</button>
-                <p class="wallet-connect__hint" id="wallet-message">Clique para conectar com Phantom ou Backpack. Funciona apenas em navegadores com HTTPS e extensao instalada.</p>
+            <h2>Carteiras oficiais</h2>
+            <p>Todo apoio financia servidor, marketing e eventos. Doadores recebem a tag <span class="badge">[FUNDADOR]</span> em jogo e nos nossos canais.</p>
+            <div class="wallet-grid">
+                <article class="wallet-card">
+                    <header>
+                        <span class="wallet-chain">Solana</span>
+                        <span class="wallet-status" id="wallet-message">Clique em Connect Wallet no topo para vincular Phantom ou Backpack.</span>
+                    </header>
+                    <code>7VjPLaLqPmWLE2ZPR9u94Lx6G6BEsfLzQLnSQy8pNCNo</code>
+                    <button class="wallet-copy" data-wallet="7VjPLaLqPmWLE2ZPR9u94Lx6G6BEsfLzQLnSQy8pNCNo">Copiar</button>
+                </article>
+                <article class="wallet-card">
+                    <header>
+                        <span class="wallet-chain">Ethereum</span>
+                    </header>
+                    <code>0xa09dDDdfE7Dc5f6cb292B1c4d77e6f34728d3C41</code>
+                    <button class="wallet-copy" data-wallet="0xa09dDDdfE7Dc5f6cb292B1c4d77e6f34728d3C41">Copiar</button>
+                </article>
+                <article class="wallet-card">
+                    <header>
+                        <span class="wallet-chain">Base</span>
+                    </header>
+                    <code>0xa09dDDdfE7Dc5f6cb292B1c4d77e6f34728d3C41</code>
+                    <button class="wallet-copy" data-wallet="0xa09dDDdfE7Dc5f6cb292B1c4d77e6f34728d3C41">Copiar</button>
+                </article>
+                <article class="wallet-card">
+                    <header>
+                        <span class="wallet-chain">Sui</span>
+                    </header>
+                    <code>0xca12d08c3e1d5b7141150c73842226984a377bd7a3e5fd7ed56336ea5edcc37a</code>
+                    <button class="wallet-copy" data-wallet="0xca12d08c3e1d5b7141150c73842226984a377bd7a3e5fd7ed56336ea5edcc37a">Copiar</button>
+                </article>
+                <article class="wallet-card">
+                    <header>
+                        <span class="wallet-chain">Polygon</span>
+                    </header>
+                    <code>0xa09dDDdfE7Dc5f6cb292B1c4d77e6f34728d3C41</code>
+                    <button class="wallet-copy" data-wallet="0xa09dDDdfE7Dc5f6cb292B1c4d77e6f34728d3C41">Copiar</button>
+                </article>
+                <article class="wallet-card">
+                    <header>
+                        <span class="wallet-chain">Bitcoin</span>
+                    </header>
+                    <code>bc1q7rc3efwrllvl5ps2ca2xjp0xmkma9vupmtdvw8</code>
+                    <button class="wallet-copy" data-wallet="bc1q7rc3efwrllvl5ps2ca2xjp0xmkma9vupmtdvw8">Copiar</button>
+                </article>
             </div>
-            <h3>Carteiras para doacao</h3>
-            <p>Quer apoiar o desenvolvimento e manter o servidor eterno? Use as carteiras oficiais abaixo. Doadores recebem a tag <span class="badge">[FUNDADOR]</span> dentro do servidor e nos canais comunitarios. Anote apenas enderecos confirmados nos nossos canais.</p>
-            <ul class="wallet-list">
-                <li><span>Solana</span><code>7VjPLaLqPmWLE2ZPR9u94Lx6G6BEsfLzQLnSQy8pNCNo</code></li>
-                <li><span>Ethereum</span><code>0xa09dDDdfE7Dc5f6cb292B1c4d77e6f34728d3C41</code></li>
-                <li><span>Base</span><code>0xa09dDDdfE7Dc5f6cb292B1c4d77e6f34728d3C41</code></li>
-                <li><span>Sui</span><code>0xca12d08c3e1d5b7141150c73842226984a377bd7a3e5fd7ed56336ea5edcc37a</code></li>
-                <li><span>Polygon</span><code>0xa09dDDdfE7Dc5f6cb292B1c4d77e6f34728d3C41</code></li>
-                <li><span>Bitcoin</span><code>bc1q7rc3efwrllvl5ps2ca2xjp0xmkma9vupmtdvw8</code></li>
-            </ul>
         </section>
 
         <section class="section section--loja" id="loja">
@@ -114,7 +145,24 @@
             <p class="pump-highlight">11/11/2025: BlazeCoin estreia na pump.fun. Nada de insiders, so comunidade coordenada para acender a chama.</p>
             <div class="pump-cta">
                 <p>Prepare a Phantom/Backpack, adicione SOL na carteira e ative notificacoes no Discord. Quando o launch subir, voce recebe o link oficial.</p>
-                <button class="pump-cta__button" type="button" disabled>Contagem regressiva em breve</button>
+                <div class="pump-timer" data-target="2025-11-11T15:00:00Z" id="pump-timer">
+                    <div class="pump-timer__unit">
+                        <span class="pump-timer__value" data-unit="days">--</span>
+                        <span class="pump-timer__label">Dias</span>
+                    </div>
+                    <div class="pump-timer__unit">
+                        <span class="pump-timer__value" data-unit="hours">--</span>
+                        <span class="pump-timer__label">Horas</span>
+                    </div>
+                    <div class="pump-timer__unit">
+                        <span class="pump-timer__value" data-unit="minutes">--</span>
+                        <span class="pump-timer__label">Min</span>
+                    </div>
+                    <div class="pump-timer__unit">
+                        <span class="pump-timer__value" data-unit="seconds">--</span>
+                        <span class="pump-timer__label">Seg</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -133,7 +181,10 @@
         const copyButton = document.querySelector(".hero__copy");
         const ipElement = document.getElementById("server-ip");
         const footerYear = document.getElementById("year");
+        const pumpTimer = document.getElementById("pump-timer");
+
         footerYear.textContent = new Date().getFullYear();
+
         copyButton?.addEventListener("click", () => {
             const ip = copyButton.dataset.ip;
             if (!ip) {
@@ -148,6 +199,55 @@
                 ipElement.textContent = `IP: ${ip} (copie manualmente)`;
             });
         });
+
+        if (pumpTimer) {
+            const targetAttr = pumpTimer.getAttribute("data-target");
+            const targetDate = targetAttr ? new Date(targetAttr) : null;
+            const values = {
+                days: pumpTimer.querySelector('[data-unit="days"]'),
+                hours: pumpTimer.querySelector('[data-unit="hours"]'),
+                minutes: pumpTimer.querySelector('[data-unit="minutes"]'),
+                seconds: pumpTimer.querySelector('[data-unit="seconds"]')
+            };
+
+            const render = (diff) => {
+                if (!values.days || !values.hours || !values.minutes || !values.seconds) {
+                    return;
+                }
+
+                values.days.textContent = String(Math.max(diff.days, 0)).padStart(2, "0");
+                values.hours.textContent = String(Math.max(diff.hours, 0)).padStart(2, "0");
+                values.minutes.textContent = String(Math.max(diff.minutes, 0)).padStart(2, "0");
+                values.seconds.textContent = String(Math.max(diff.seconds, 0)).padStart(2, "0");
+            };
+
+            const calculateDiff = () => {
+                if (!targetDate || Number.isNaN(targetDate.getTime())) {
+                    render({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                    return;
+                }
+
+                const now = new Date();
+                const totalMs = targetDate.getTime() - now.getTime();
+
+                if (totalMs <= 0) {
+                    render({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                    pumpTimer.classList.add("pump-timer--completed");
+                    pumpTimer.setAttribute("data-finished", "true");
+                    return;
+                }
+
+                const seconds = Math.floor((totalMs / 1000) % 60);
+                const minutes = Math.floor((totalMs / (1000 * 60)) % 60);
+                const hours = Math.floor((totalMs / (1000 * 60 * 60)) % 24);
+                const days = Math.floor(totalMs / (1000 * 60 * 60 * 24));
+
+                render({ days, hours, minutes, seconds });
+            };
+
+            calculateDiff();
+            setInterval(calculateDiff, 1000);
+        }
     </script>
 </body>
 </html>

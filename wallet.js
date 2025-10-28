@@ -1,10 +1,39 @@
 (() => {
+    const WALLET_EVENT_NAME = "blazeWalletChange";
+
     const formatAddress = (pubkey) => {
         const address = typeof pubkey === "string" ? pubkey : pubkey?.toString?.();
         if (!address) {
             return "";
         }
         return `${address.slice(0, 4)}...${address.slice(-4)}`;
+    };
+
+    const emitWalletChange = (detail) => {
+        window.dispatchEvent(new CustomEvent(WALLET_EVENT_NAME, { detail }));
+    };
+
+    const setGlobalWallet = (info) => {
+        if (!info) {
+            window.blazeWallet = null;
+            emitWalletChange({ connected: false });
+            return;
+        }
+
+        window.blazeWallet = {
+            provider: info.provider,
+            name: info.name,
+            publicKey: info.publicKey,
+            address: info.address
+        };
+
+        emitWalletChange({
+            connected: true,
+            provider: info.provider,
+            name: info.name,
+            publicKey: info.publicKey,
+            address: info.address
+        });
     };
 
     const detectProvider = () => {
@@ -26,12 +55,18 @@
     const setupWalletConnect = () => {
         const button = document.getElementById("connect-wallet");
         const messageEl = document.getElementById("wallet-message");
-        if (!button || !messageEl) {
+        const copyButtons = document.querySelectorAll(".wallet-copy");
+
+        if (!button) {
             return;
         }
 
+        setGlobalWallet(null);
+
         const setMessage = (text) => {
-            messageEl.textContent = text;
+            if (messageEl) {
+                messageEl.textContent = text;
+            }
         };
 
         let activeProviderInfo = null;
@@ -44,13 +79,21 @@
             provider.on("accountChanged", (account) => {
                 if (!account) {
                     button.disabled = false;
-                    button.textContent = "Conectar wallet Solana";
+                    button.textContent = "Connect Wallet";
                     setMessage("Wallet desconectada. Clique para conectar novamente.");
                     activeProviderInfo = null;
+                    setGlobalWallet(null);
                     return;
                 }
 
-                setMessage(`Wallet conectada (${name}): ${formatAddress(account)}`);
+                const address = formatAddress(account);
+                setMessage(`Wallet conectada (${name}): ${address}`);
+                setGlobalWallet({
+                    provider,
+                    name,
+                    publicKey: account?.toString?.() ?? account,
+                    address
+                });
             });
         };
 
@@ -63,10 +106,17 @@
             try {
                 const response = await providerInfo.provider.connect({ onlyIfTrusted: true });
                 if (response?.publicKey) {
+                    const address = formatAddress(response.publicKey);
                     activeProviderInfo = providerInfo;
                     button.disabled = true;
                     button.textContent = "Wallet conectada";
-                    setMessage(`Wallet conectada (${providerInfo.name}): ${formatAddress(response.publicKey)}`);
+                    setMessage(`Wallet conectada (${providerInfo.name}): ${address}`);
+                    setGlobalWallet({
+                        provider: providerInfo.provider,
+                        name: providerInfo.name,
+                        publicKey: response.publicKey?.toString?.() ?? response.publicKey,
+                        address
+                    });
                     attachAccountListener(providerInfo.provider, providerInfo.name);
                 }
             } catch (error) {
@@ -87,9 +137,16 @@
             try {
                 const response = await providerInfo.provider.connect();
                 if (response?.publicKey) {
+                    const address = formatAddress(response.publicKey);
                     activeProviderInfo = providerInfo;
                     button.textContent = "Wallet conectada";
-                    setMessage(`Wallet conectada (${providerInfo.name}): ${formatAddress(response.publicKey)}`);
+                    setMessage(`Wallet conectada (${providerInfo.name}): ${address}`);
+                    setGlobalWallet({
+                        provider: providerInfo.provider,
+                        name: providerInfo.name,
+                        publicKey: response.publicKey?.toString?.() ?? response.publicKey,
+                        address
+                    });
                     attachAccountListener(providerInfo.provider, providerInfo.name);
                 } else {
                     button.disabled = false;
@@ -105,6 +162,27 @@
 
         button.addEventListener("click", handleClick);
         eagerConnect();
+
+        copyButtons.forEach((copyBtn) => {
+            copyBtn.addEventListener("click", () => {
+                const value = copyBtn.dataset.wallet;
+                if (!value) {
+                    return;
+                }
+                navigator.clipboard.writeText(value).then(() => {
+                    const original = copyBtn.textContent ?? "Copiar";
+                    copyBtn.textContent = "Copiado!";
+                    setTimeout(() => {
+                        copyBtn.textContent = original;
+                    }, 2000);
+                }).catch(() => {
+                    copyBtn.textContent = "Erro";
+                    setTimeout(() => {
+                        copyBtn.textContent = "Copiar";
+                    }, 2000);
+                });
+            });
+        });
     };
 
     if (document.readyState === "loading") {
