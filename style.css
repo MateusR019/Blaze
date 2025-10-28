@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --bg: #0b0907;
     --surface: #15100d;
     --surface-alt: #1d1611;
@@ -82,6 +82,11 @@ main {
 
 .hero__content {
     max-width: 720px;
+}
+
+.market-hero {
+    min-height: 40vh;
+    padding: clamp(4rem, 7vw, 6rem) 1.5rem 3.5rem;
 }
 
 .site-header {
@@ -264,6 +269,12 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.market-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
 .card {
     background: var(--surface-alt);
     border: 1px solid var(--border);
@@ -283,13 +294,67 @@ main {
     font-size: 0.98rem;
 }
 
-.section--nft,
+.drop-card {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    display: grid;
+    gap: 0.85rem;
+}
+
+.drop-card h3 {
+    color: var(--accent-soft);
+    letter-spacing: 0.08em;
+}
+
+.drop-card ul {
+    list-style: none;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.drop-card ul li {
+    color: var(--muted);
+}
+
+
 .section--fairplay {
     border-color: var(--accent);
 }
 
 .section--loja {
     border-color: var(--accent-dark);
+}
+
+.pump-highlight {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-soft);
+    margin-bottom: 1.6rem;
+}
+
+.pump-cta {
+    display: grid;
+    gap: 0.9rem;
+    justify-items: center;
+    text-align: center;
+}
+
+.pump-cta p {
+    color: var(--muted);
+    max-width: 520px;
+}
+
+.pump-cta__button {
+    background: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 18px;
+    padding: 0.9rem 2.4rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    cursor: not-allowed;
 }
 
 .nft-list {
@@ -312,10 +377,23 @@ main {
     color: var(--accent-soft);
 }
 
+.roadmap,
 .leaderboard {
     list-style: none;
     display: grid;
     gap: 0.75rem;
+}
+
+.roadmap li {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.9rem 1.3rem;
+    color: var(--muted);
+}
+
+.roadmap strong {
+    color: var(--accent-soft);
 }
 
 .leaderboard li {
@@ -354,6 +432,108 @@ main {
 
 .section--cta {
     text-align: center;
+}
+
+.section--donate {
+    border-color: var(--accent);
+}
+
+.badge {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.wallet-connect {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.6rem 0 2rem;
+    justify-items: center;
+    text-align: center;
+}
+
+.wallet-connect__button {
+    background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+    border: 1px solid var(--accent);
+    border-radius: 18px;
+    padding: 0.95rem 2.6rem;
+    color: var(--surface);
+    font-size: 0.98rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.wallet-connect__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(255, 122, 24, 0.28);
+}
+
+.wallet-connect__button:disabled {
+    background: transparent;
+    border: 1px dashed var(--accent);
+    color: var(--muted);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.wallet-connect__hint {
+    color: var(--muted);
+    font-size: 0.92rem;
+    max-width: 420px;
+}
+
+.wallet-list {
+    list-style: none;
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1.8rem;
+}
+
+.wallet-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+}
+
+.wallet-list span {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.wallet-list code {
+    font-family: "Share Tech Mono", monospace;
+    word-break: break-all;
+    color: var(--accent-soft);
+}
+
+.faq {
+    display: grid;
+    gap: 1.3rem;
+}
+
+.faq article {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.6rem;
+}
+
+.faq h3 {
+    color: var(--accent-soft);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+}
+
+.faq p {
+    color: var(--muted);
 }
 
 .cta__ip {
